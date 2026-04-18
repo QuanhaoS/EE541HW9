@@ -7,7 +7,7 @@
 2) Builds ``prepared_data/{train,val,test}/<class>/`` with a 70/15/15 stratified split
    per class (seed 42), for training without leakage.
 
-Run from HW9: ``python prepare_data.py``
+Run from ``HW9/`` or ``HW9/q1/`` (script may live under ``q1/``; datasets are written next to ``S1_Raw_Photographs_Full_Study/``).
 """
 from __future__ import annotations
 
@@ -15,10 +15,14 @@ import random
 import shutil
 from pathlib import Path
 
-RAW_DIR = Path(__file__).resolve().parent / "S1_Raw_Photographs_Full_Study"
+# Project root: parent of q1/, or directory containing this file if not under q1
+_THIS = Path(__file__).resolve().parent
+HW9_HOME = _THIS.parent if _THIS.name == "q1" else _THIS
+
+RAW_DIR = HW9_HOME / "S1_Raw_Photographs_Full_Study"
 # PDF layout: data/ethanol, data/pentane, data/propanol (all images, ImageFolder-ready)
-DATA_ROOT = Path(__file__).resolve().parent / "data"
-OUT_ROOT = Path(__file__).resolve().parent / "prepared_data"
+DATA_ROOT = HW9_HOME / "data"
+OUT_ROOT = HW9_HOME / "prepared_data"
 
 CLASS_SPECS = [
     ("Ethanol", "ethanol"),
